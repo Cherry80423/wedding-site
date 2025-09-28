@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Wedding Gallery</title>
+  <meta name="description" content="純照片婚紗相簿，支援手機瀑布流與點擊放大。"/>
+  <style>
+    :root{
+      --bg:#0f0f0f;         /* 全暗背景，照片更突出 */
+      --ink:#f2f2f2;        /* 文字顏色 */
+      --muted:#9a9a9a;      /* 次文字 */
+      --accent:#ffffff;     /* 邊框/hover */
+      --gap:10px;           /* 卡片間距 */
+      --radius:14px;        /* 圖片圓角 */
+      --shadow: 0 10px 30px rgba(0,0,0,.5);
+    }
+    html,body{height:100%}
+    body{margin:0; background:var(--bg); color:var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;}
+    .wrap{width:min(1200px,94%); margin:0 auto;}
+
+    /* 頁首（可自行刪除或改為LOGO） */
+    header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(1.2) blur(8px); background:rgba(15,15,15,.6); border-bottom:1px solid rgba(255,255,255,.06)}
+    .head{display:flex; align-items:center; justify-content:space-between; padding:10px 0}
+    .brand{font-weight:900; letter-spacing:.06em}
+    .count{color:var(--muted); font-size:.9rem}
+
+  /* 瀑布流（純 CSS 自動排版）*/
+    .masonry{column-width: 280px; column-gap: var(--gap); padding:18px 0}
+    .card{break-inside: avoid; margin: 0 0 var(--gap); position:relative; border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);}
+    .card img{width:100%; height:auto; display:block;}
+    .card:hover::after{content:"點擊放大"; position:absolute; right:10px; bottom:10px; background:rgba(0,0,0,.55); color:#fff; font-size:12px; padding:.25rem .5rem; border-radius:6px}
+ 
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.92); z-index:20}
+    .lightbox.show{display:flex}
+    .lightbox img{max-width:min(94vw,1400px); max-height:88vh; border-radius:12px}
+    .lightbox .close, .lightbox .prev, .lightbox .next{
+      position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.12); color:#fff; border:0; padding:.7rem .9rem; border-radius:12px; cursor:pointer
+    }
+    .lightbox .close{top:16px; right:16px; transform:none}
+    .lightbox .prev{left:16px}
+    .lightbox .next{right:16px}
+
+    footer{color:var(--muted); text-align:center; padding:18px 0 28px}
+    .tip{font-size:.9rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap head">
+      <div class="brand">政諳 & 巧郁 — Wedding Gallery</div>
+      <div class="count" id="count">0 Photos</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!--
+      使用方式：
+      1) 把你的照片放到 images/ 資料夾。
+      2) 依序在下方 <figure> 裡面替換 src 與 alt。想增加就複製 <figure>。
+      3) 建議提供不同比例（直式/橫式）混排會更自然。
+    -->
+    <section class="masonry" id="gallery">
+      <figure class="card"><img loading="lazy" src="images/p1.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p2.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p3.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p4.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p5.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p6.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p7.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p8.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p9.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p10.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p11.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p12.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p13.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p14.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p15.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p16.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p17.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p18.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p19.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p20.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p21.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p22.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p23.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p24.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p25.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p26.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p27.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p28.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p29.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p30.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p31.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p32.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p33.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p34.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p35.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p36.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p37.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p38.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p39.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p40.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p41.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p42.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p43.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p44.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p45.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p46.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p47.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p48.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p49.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p50.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p51.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p52.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p53.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p54.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p55.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p56.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p57.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p58.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p59.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p60.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p61.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p62.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p63.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p64.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p65.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p66.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p67.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p68.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p69.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p70.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p71.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p72.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p73.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p74.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p75.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p76.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p77.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p78.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p79.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p80.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p81.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p82.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p83.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p84.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p85.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p86.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p87.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p88.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p89.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p90.jpg"></figure>
+            <figure class="card"><img loading="lazy" src="images/p91.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p92.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p93.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p94.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p95.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p96.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p97.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p98.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p99.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p100.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p101.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p102.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p103.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p104.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p105.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p106.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p107.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p108.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p109.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p110.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p111.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p112.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p113.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p114.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p115.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p116.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p117.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p118.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p119.jpg" ></figure> 
+      <figure class="card"><img loading="lazy" src="images/p120.jpg" ></figure>
+           <figure class="card"><img loading="lazy" src="images/p121.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p122.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p123.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p124.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p125.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p126.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p127.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p128.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p129.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p130.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p131.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p132.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p133.jpg"></figure>
+      <figure class="card"><img loading="lazy" src="images/p134.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p135.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p136.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p137.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p138.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p139.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p140.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p141.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p142.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p143.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p144.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p145.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p146.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p147.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p148.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p149.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p150.jpg" ></figure>
+            <figure class="card"><img loading="lazy" src="images/p151.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p152.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p153.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p154.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p155.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p156.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p157.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p158.jpg" ></figure>
+      <figure class="card"><img loading="lazy" src="images/p159.jpg" ></figure>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="相片預覽">
+    <button class="close" aria-label="關閉" onclick="closeLightbox()">✕</button>
+    <button class="prev" aria-label="上一張" onclick="nav(-1)">⟨</button>
+    <img id="lightImg" src="" alt="放大相片" />
+    <button class="next" aria-label="下一張" onclick="nav(1)">⟩</button>
+  </div>
+
+ 
+
+  <script>
+    const gallery = Array.from(document.querySelectorAll('#gallery img'))
+    const count = document.getElementById('count')
+    const lb = document.getElementById('lightbox')
+    const lbImg = document.getElementById('lightImg')
+    let idx = -1
+
+    // 顯示照片數
+    count.textContent = `${gallery.length} Photos`
+
+    // 點擊放大
+    document.getElementById('gallery').addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return
+      e.preventDefault()
+      idx = gallery.indexOf(img)
+      openLightbox()
+    })
+
+    function openLightbox(){
+      lb.classList.add('show')
+      lbImg.src = gallery[idx].src
+      lbImg.alt = gallery[idx].alt || '放大相片'
+    }
+    function closeLightbox(){ lb.classList.remove('show'); lbImg.src=''; }
+    function nav(step){
+      if(idx<0) return
+      idx = (idx + step + gallery.length) % gallery.length
+      lbImg.src = gallery[idx].src
+      lbImg.alt = gallery[idx].alt || '放大相片'
+    }
+
+    // 鍵盤導覽／ESC 關閉
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('show')) return
+      if(e.key==='Escape') closeLightbox()
+      if(e.key==='ArrowLeft') nav(-1)
+      if(e.key==='ArrowRight') nav(1)
+    })
+
+    // 點背景關閉
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLightbox() })
+  </script>
+</body>
+</html>
